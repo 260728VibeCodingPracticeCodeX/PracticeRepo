@@ -68,11 +68,52 @@
       box-shadow: 0 16px 50px rgba(24, 33, 43, 0.07);
     }
 
-    .theme-toggle {
+    .toolbar {
       position: absolute;
       top: 22px;
       right: 24px;
       z-index: 10;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .language-switch {
+      display: flex;
+      gap: 3px;
+      padding: 4px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
+    .language-button {
+      padding: 5px 8px;
+      color: var(--muted);
+      background: transparent;
+      border: 0;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .language-button:hover {
+      color: var(--blue);
+    }
+
+    .language-button[aria-pressed="true"] {
+      color: var(--paper);
+      background: var(--blue);
+    }
+
+    .language-button:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--blue) 35%, transparent);
+      outline-offset: 2px;
+    }
+
+    .theme-toggle {
       display: inline-flex;
       gap: 7px;
       align-items: center;
@@ -401,10 +442,17 @@
         box-shadow: none;
       }
 
-      .theme-toggle {
+      .toolbar {
         position: fixed;
         top: 14px;
         right: 14px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        max-width: calc(100% - 28px);
+      }
+
+      .language-switch,
+      .theme-toggle {
         background: color-mix(in srgb, var(--paper) 92%, transparent);
         backdrop-filter: blur(8px);
       }
@@ -459,19 +507,27 @@
 </head>
 <body>
   <main class="page">
-    <button class="theme-toggle" type="button" aria-label="다크모드 전환" aria-pressed="false">
-      <span class="theme-icon" aria-hidden="true">◐</span>
-      <span class="theme-label">다크모드</span>
-    </button>
+    <div class="toolbar">
+      <div class="language-switch" role="group" aria-label="언어 선택">
+        <button class="language-button" type="button" data-lang="ko" aria-pressed="true">한국어</button>
+        <button class="language-button" type="button" data-lang="en" aria-pressed="false">English</button>
+        <button class="language-button" type="button" data-lang="ja" aria-pressed="false">日本語</button>
+        <button class="language-button" type="button" data-lang="zh" aria-pressed="false">中文</button>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="다크모드 전환" aria-pressed="false">
+        <span class="theme-icon" aria-hidden="true">◐</span>
+        <span class="theme-label" data-i18n="theme.dark">다크모드</span>
+      </button>
+    </div>
 
     <header class="hero">
       <div class="hero-copy">
-        <p class="hero-label">PERSONAL PROFILE</p>
-        <h1>이성호</h1>
+        <p class="hero-label" data-i18n="hero.label">PERSONAL PROFILE</p>
+        <h1 data-i18n="hero.name">이성호</h1>
         <p class="name-en">LEE SUNG HO</p>
-        <p class="job">임베디드 엔지니어 · 전자제품 개발자</p>
-        <p class="role">스타트업 개발팀장</p>
-        <p class="hero-statement">생활 속 아이디어를 실제로 움직이는 제품으로 만듭니다.</p>
+        <p class="job" data-i18n="hero.job">임베디드 엔지니어 · 전자제품 개발자</p>
+        <p class="role" data-i18n="hero.role">스타트업 개발팀장</p>
+        <p class="hero-statement" data-i18n="hero.statement">생활 속 아이디어를 실제로 움직이는 제품으로 만듭니다.</p>
       </div>
 
       <div class="portrait" aria-label="이성호 프로필 그래픽">
@@ -483,92 +539,315 @@
     <div class="content">
       <section class="section">
         <div>
-          <span class="section-index">01 · WHO I AM</span>
-          <h2>어떤 사람인가</h2>
+          <span class="section-index" data-i18n="who.index">01 · WHO I AM</span>
+          <h2 data-i18n="who.title">어떤 사람인가</h2>
         </div>
         <div class="section-body">
-          <p class="lead">문제가 생기면 직접 확인하고, 원인을 찾을 때까지 차근차근 살펴봅니다.</p>
-          <p class="sub-copy">복잡한 문제는 작은 단위로 나누고 실제 사용 환경에서도 안정적으로 쓸 수 있는 결과를 중요하게 생각합니다.</p>
-          <div class="example"><span class="example-icon" aria-hidden="true">🪴</span>목마르면 표정이 바뀌는 화분 같은 아이디어를 좋아합니다.</div>
+          <p class="lead" data-i18n="who.lead">문제가 생기면 직접 확인하고, 원인을 찾을 때까지 차근차근 살펴봅니다.</p>
+          <p class="sub-copy" data-i18n="who.copy">복잡한 문제는 작은 단위로 나누고 실제 사용 환경에서도 안정적으로 쓸 수 있는 결과를 중요하게 생각합니다.</p>
+          <div class="example"><span class="example-icon" aria-hidden="true">🪴</span><span data-i18n="who.example">목마르면 표정이 바뀌는 화분 같은 아이디어를 좋아합니다.</span></div>
         </div>
       </section>
 
       <section class="section">
         <div>
-          <span class="section-index">02 · WHAT I DO</span>
-          <h2>현재 하는 일</h2>
+          <span class="section-index" data-i18n="work.index">02 · WHAT I DO</span>
+          <h2 data-i18n="work.title">현재 하는 일</h2>
         </div>
         <div class="section-body role-grid">
           <article class="info-card">
-            <strong>아이디어 구체화</strong>
-            <span>생활 속 생각을 실제로 개발할 수 있는 제품의 모습으로 정리합니다.</span>
+            <strong data-i18n="work.idea.title">아이디어 구체화</strong>
+            <span data-i18n="work.idea.copy">생활 속 생각을 실제로 개발할 수 있는 제품의 모습으로 정리합니다.</span>
           </article>
           <article class="info-card">
-            <strong>팀과 문제 해결</strong>
-            <span>개발 과정에서 생기는 문제를 팀원들과 확인하고 함께 해결합니다.</span>
+            <strong data-i18n="work.team.title">팀과 문제 해결</strong>
+            <span data-i18n="work.team.copy">개발 과정에서 생기는 문제를 팀원들과 확인하고 함께 해결합니다.</span>
           </article>
         </div>
       </section>
 
       <section class="section">
         <div>
-          <span class="section-index">03 · WHY I’M HERE</span>
-          <h2>교육에 참여한 이유</h2>
+          <span class="section-index" data-i18n="education.index">03 · WHY I’M HERE</span>
+          <h2 data-i18n="education.title">교육에 참여한 이유</h2>
         </div>
         <div class="section-body">
-          <p class="lead">바이브코딩을 실제 업무에 활용할 방법을 직접 확인해 보고 싶습니다.</p>
+          <p class="lead" data-i18n="education.lead">바이브코딩을 실제 업무에 활용할 방법을 직접 확인해 보고 싶습니다.</p>
           <div class="purpose-grid">
-            <div class="purpose-card"><strong>테스트용 앱</strong><span>제품 기능과 아이디어 확인</span></div>
-            <div class="purpose-card"><strong>업무 도구</strong><span>반복적인 개발 업무 줄이기</span></div>
-            <div class="purpose-card"><strong>소개 자료</strong><span>회사와 제품을 쉽게 설명하기</span></div>
+            <div class="purpose-card"><strong data-i18n="education.test.title">테스트용 앱</strong><span data-i18n="education.test.copy">제품 기능과 아이디어 확인</span></div>
+            <div class="purpose-card"><strong data-i18n="education.tool.title">업무 도구</strong><span data-i18n="education.tool.copy">반복적인 개발 업무 줄이기</span></div>
+            <div class="purpose-card"><strong data-i18n="education.material.title">소개 자료</strong><span data-i18n="education.material.copy">회사와 제품을 쉽게 설명하기</span></div>
           </div>
         </div>
       </section>
 
       <section class="section">
         <div>
-          <span class="section-index">04 · HOW I THINK</span>
-          <h2>일하는 방식</h2>
+          <span class="section-index" data-i18n="thinking.index">04 · HOW I THINK</span>
+          <h2 data-i18n="thinking.title">일하는 방식</h2>
         </div>
         <div class="section-body">
           <div class="trait-list" aria-label="나를 표현하는 키워드">
-            <span class="trait">호기심</span>
-            <span class="trait">끈기</span>
-            <span class="trait">현실적인 문제 해결</span>
+            <span class="trait" data-i18n="thinking.curiosity">호기심</span>
+            <span class="trait" data-i18n="thinking.persistence">끈기</span>
+            <span class="trait" data-i18n="thinking.practical">현실적인 문제 해결</span>
           </div>
-          <p class="lead">넘겨짚기보다 직접 확인하고, 임시방편보다 실제로 계속 사용할 수 있는 방법을 찾습니다.</p>
+          <p class="lead" data-i18n="thinking.lead">넘겨짚기보다 직접 확인하고, 임시방편보다 실제로 계속 사용할 수 있는 방법을 찾습니다.</p>
         </div>
       </section>
 
       <section class="section">
         <div>
-          <span class="section-index">05 · OUTSIDE WORK</span>
-          <h2>좋아하는 시간</h2>
+          <span class="section-index" data-i18n="outside.index">05 · OUTSIDE WORK</span>
+          <h2 data-i18n="outside.title">좋아하는 시간</h2>
         </div>
         <div class="section-body interest-layout">
           <div class="interest-icons" aria-hidden="true">🚗 🎵</div>
-          <p class="lead">그날의 기분에 따라 다양한 음악을 들으며 운전하고, 생각을 정리하는 시간을 좋아합니다.</p>
+          <p class="lead" data-i18n="outside.lead">그날의 기분에 따라 다양한 음악을 들으며 운전하고, 생각을 정리하는 시간을 좋아합니다.</p>
         </div>
       </section>
     </div>
 
-    <footer>교육에서 잘 부탁드립니다.</footer>
+    <footer data-i18n="footer">교육에서 잘 부탁드립니다.</footer>
   </main>
   <script>
     (() => {
       const root = document.documentElement;
-      const button = document.querySelector(".theme-toggle");
-      const label = document.querySelector(".theme-label");
+      const themeButton = document.querySelector(".theme-toggle");
+      const themeLabel = document.querySelector(".theme-label");
+      const languageSwitch = document.querySelector(".language-switch");
+      const languageButtons = document.querySelectorAll(".language-button");
+      const traitList = document.querySelector(".trait-list");
+
+      const translations = {
+        ko: {
+          "page.title": "이성호 | 자기소개",
+          "language.label": "언어 선택",
+          "theme.toggle": "화면 테마 전환",
+          "theme.dark": "다크모드",
+          "theme.light": "라이트모드",
+          "traits.label": "나를 표현하는 키워드",
+          "hero.label": "개인 소개",
+          "hero.name": "이성호",
+          "hero.job": "임베디드 엔지니어 · 전자제품 개발자",
+          "hero.role": "스타트업 개발팀장",
+          "hero.statement": "생활 속 아이디어를 실제로 움직이는 제품으로 만듭니다.",
+          "who.index": "01 · WHO I AM",
+          "who.title": "어떤 사람인가",
+          "who.lead": "문제가 생기면 직접 확인하고, 원인을 찾을 때까지 차근차근 살펴봅니다.",
+          "who.copy": "복잡한 문제는 작은 단위로 나누고 실제 사용 환경에서도 안정적으로 쓸 수 있는 결과를 중요하게 생각합니다.",
+          "who.example": "목마르면 표정이 바뀌는 화분 같은 아이디어를 좋아합니다.",
+          "work.index": "02 · WHAT I DO",
+          "work.title": "현재 하는 일",
+          "work.idea.title": "아이디어 구체화",
+          "work.idea.copy": "생활 속 생각을 실제로 개발할 수 있는 제품의 모습으로 정리합니다.",
+          "work.team.title": "팀과 문제 해결",
+          "work.team.copy": "개발 과정에서 생기는 문제를 팀원들과 확인하고 함께 해결합니다.",
+          "education.index": "03 · WHY I’M HERE",
+          "education.title": "교육에 참여한 이유",
+          "education.lead": "바이브코딩을 실제 업무에 활용할 방법을 직접 확인해 보고 싶습니다.",
+          "education.test.title": "테스트용 앱",
+          "education.test.copy": "제품 기능과 아이디어 확인",
+          "education.tool.title": "업무 도구",
+          "education.tool.copy": "반복적인 개발 업무 줄이기",
+          "education.material.title": "소개 자료",
+          "education.material.copy": "회사와 제품을 쉽게 설명하기",
+          "thinking.index": "04 · HOW I THINK",
+          "thinking.title": "일하는 방식",
+          "thinking.curiosity": "호기심",
+          "thinking.persistence": "끈기",
+          "thinking.practical": "현실적인 문제 해결",
+          "thinking.lead": "넘겨짚기보다 직접 확인하고, 임시방편보다 실제로 계속 사용할 수 있는 방법을 찾습니다.",
+          "outside.index": "05 · OUTSIDE WORK",
+          "outside.title": "좋아하는 시간",
+          "outside.lead": "그날의 기분에 따라 다양한 음악을 들으며 운전하고, 생각을 정리하는 시간을 좋아합니다.",
+          "footer": "교육에서 잘 부탁드립니다."
+        },
+        en: {
+          "page.title": "Sung Ho Lee | Profile",
+          "language.label": "Select language",
+          "theme.toggle": "Switch display theme",
+          "theme.dark": "Dark",
+          "theme.light": "Light",
+          "traits.label": "Keywords that describe me",
+          "hero.label": "PERSONAL PROFILE",
+          "hero.name": "Sung Ho Lee",
+          "hero.job": "Embedded Engineer · Electronics Product Developer",
+          "hero.role": "Development Team Lead at a Startup",
+          "hero.statement": "I turn everyday ideas into products that work in the real world.",
+          "who.index": "01 · WHO I AM",
+          "who.title": "Who I am",
+          "who.lead": "When a problem appears, I check it myself and work through it until I find the cause.",
+          "who.copy": "I break complex problems into smaller parts and value results that remain reliable in real-world use.",
+          "who.example": "I like ideas such as a plant pot whose expression changes when it needs water.",
+          "work.index": "02 · WHAT I DO",
+          "work.title": "What I do",
+          "work.idea.title": "Shape ideas",
+          "work.idea.copy": "I turn everyday thoughts into product concepts that can actually be developed.",
+          "work.team.title": "Solve problems together",
+          "work.team.copy": "I investigate issues during development and solve them with my team.",
+          "education.index": "03 · WHY I’M HERE",
+          "education.title": "Why I joined",
+          "education.lead": "I want to test practical ways to use vibe coding in my day-to-day work.",
+          "education.test.title": "Test apps",
+          "education.test.copy": "Check product functions and ideas",
+          "education.tool.title": "Work tools",
+          "education.tool.copy": "Reduce repetitive development tasks",
+          "education.material.title": "Intro materials",
+          "education.material.copy": "Explain the company and products clearly",
+          "thinking.index": "04 · HOW I THINK",
+          "thinking.title": "How I work",
+          "thinking.curiosity": "Curiosity",
+          "thinking.persistence": "Persistence",
+          "thinking.practical": "Practical problem solving",
+          "thinking.lead": "I prefer checking things directly over guessing, and lasting solutions over temporary fixes.",
+          "outside.index": "05 · OUTSIDE WORK",
+          "outside.title": "What I enjoy",
+          "outside.lead": "I enjoy driving, listening to different kinds of music, and using that time to organize my thoughts.",
+          "footer": "I look forward to taking part in the program."
+        },
+        ja: {
+          "page.title": "イ・ソンホ | 自己紹介",
+          "language.label": "言語を選択",
+          "theme.toggle": "表示テーマを切り替える",
+          "theme.dark": "ダーク",
+          "theme.light": "ライト",
+          "traits.label": "自分を表すキーワード",
+          "hero.label": "自己紹介",
+          "hero.name": "イ・ソンホ",
+          "hero.job": "組み込みエンジニア・電子製品開発者",
+          "hero.role": "スタートアップ開発チームリーダー",
+          "hero.statement": "日常のアイデアを、実際に動く製品へと形にします。",
+          "who.index": "01 · WHO I AM",
+          "who.title": "どんな人か",
+          "who.lead": "問題が起きたら自分で確認し、原因が見つかるまで一つずつ調べます。",
+          "who.copy": "複雑な問題は小さく分け、実際の使用環境でも安定して使える結果を大切にしています。",
+          "who.example": "水が必要になると表情が変わる植木鉢のようなアイデアが好きです。",
+          "work.index": "02 · WHAT I DO",
+          "work.title": "現在の仕事",
+          "work.idea.title": "アイデアを具体化",
+          "work.idea.copy": "日常の発想を、実際に開発できる製品の形に整理します。",
+          "work.team.title": "チームで問題解決",
+          "work.team.copy": "開発中に起きる問題をチームで確認し、一緒に解決します。",
+          "education.index": "03 · WHY I’M HERE",
+          "education.title": "研修に参加した理由",
+          "education.lead": "バイブコーディングを実務で活用する方法を、自分で試して確かめたいと考えています。",
+          "education.test.title": "テスト用アプリ",
+          "education.test.copy": "製品機能とアイデアの確認",
+          "education.tool.title": "業務ツール",
+          "education.tool.copy": "繰り返し作業の削減",
+          "education.material.title": "紹介資料",
+          "education.material.copy": "会社と製品を分かりやすく説明",
+          "thinking.index": "04 · HOW I THINK",
+          "thinking.title": "仕事の進め方",
+          "thinking.curiosity": "好奇心",
+          "thinking.persistence": "粘り強さ",
+          "thinking.practical": "現実的な問題解決",
+          "thinking.lead": "推測よりも自分で確認すること、一時的な対応よりも継続して使える方法を重視します。",
+          "outside.index": "05 · OUTSIDE WORK",
+          "outside.title": "好きな時間",
+          "outside.lead": "その日の気分に合うさまざまな音楽を聴きながら運転し、考えを整理する時間が好きです。",
+          "footer": "研修ではよろしくお願いします。"
+        },
+        zh: {
+          "page.title": "LEE SUNG HO | 个人介绍",
+          "language.label": "选择语言",
+          "theme.toggle": "切换显示主题",
+          "theme.dark": "深色",
+          "theme.light": "浅色",
+          "traits.label": "描述我的关键词",
+          "hero.label": "个人介绍",
+          "hero.name": "LEE SUNG HO",
+          "hero.job": "嵌入式工程师 · 电子产品开发者",
+          "hero.role": "初创企业开发团队负责人",
+          "hero.statement": "把日常生活中的想法变成真正能够运行的产品。",
+          "who.index": "01 · WHO I AM",
+          "who.title": "我是怎样的人",
+          "who.lead": "遇到问题时，我会亲自确认，并一步步查找到真正的原因。",
+          "who.copy": "我会把复杂问题拆分成较小的部分，并重视在实际使用环境中也能稳定工作的结果。",
+          "who.example": "我喜欢“缺水时表情会变化的花盆”这类有趣的产品想法。",
+          "work.index": "02 · WHAT I DO",
+          "work.title": "目前的工作",
+          "work.idea.title": "把想法具体化",
+          "work.idea.copy": "把生活中的想法整理成能够实际开发的产品方案。",
+          "work.team.title": "与团队解决问题",
+          "work.team.copy": "与团队一起确认并解决开发过程中出现的问题。",
+          "education.index": "03 · WHY I’M HERE",
+          "education.title": "参加培训的原因",
+          "education.lead": "我想亲自验证如何把氛围编程实际应用到日常工作中。",
+          "education.test.title": "测试应用",
+          "education.test.copy": "验证产品功能和想法",
+          "education.tool.title": "工作工具",
+          "education.tool.copy": "减少重复的开发工作",
+          "education.material.title": "介绍资料",
+          "education.material.copy": "清楚介绍公司和产品",
+          "thinking.index": "04 · HOW I THINK",
+          "thinking.title": "工作方式",
+          "thinking.curiosity": "好奇心",
+          "thinking.persistence": "坚持",
+          "thinking.practical": "务实地解决问题",
+          "thinking.lead": "比起猜测，我更愿意亲自确认；比起临时处理，我更重视能够长期使用的方法。",
+          "outside.index": "05 · OUTSIDE WORK",
+          "outside.title": "喜欢的时光",
+          "outside.lead": "我喜欢一边开车一边听不同类型的音乐，也会利用这段时间整理思绪。",
+          "footer": "期待参加这次培训。"
+        }
+      };
+
+      let currentLanguage = localStorage.getItem("profile-language") || "ko";
+
+      const updateThemeLabel = () => {
+        const dictionary = translations[currentLanguage];
+        const isDark = root.dataset.theme === "dark";
+        themeLabel.textContent = isDark ? dictionary["theme.light"] : dictionary["theme.dark"];
+        themeButton.setAttribute("aria-label", dictionary["theme.toggle"]);
+      };
+
       const applyTheme = (theme) => {
         const isDark = theme === "dark";
         root.dataset.theme = theme;
-        button.setAttribute("aria-pressed", String(isDark));
-        label.textContent = isDark ? "라이트모드" : "다크모드";
+        themeButton.setAttribute("aria-pressed", String(isDark));
+        updateThemeLabel();
       };
 
+      const applyLanguage = (language) => {
+        currentLanguage = translations[language] ? language : "ko";
+        const dictionary = translations[currentLanguage];
+
+        root.lang = currentLanguage === "zh" ? "zh-CN" : currentLanguage;
+        document.title = dictionary["page.title"];
+        languageSwitch.setAttribute("aria-label", dictionary["language.label"]);
+        traitList.setAttribute("aria-label", dictionary["traits.label"]);
+
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+          const translated = dictionary[element.dataset.i18n];
+          if (translated) {
+            element.textContent = translated;
+          }
+        });
+
+        languageButtons.forEach((languageButton) => {
+          languageButton.setAttribute(
+            "aria-pressed",
+            String(languageButton.dataset.lang === currentLanguage)
+          );
+        });
+
+        updateThemeLabel();
+      };
+
+      applyLanguage(currentLanguage);
       applyTheme(root.dataset.theme);
 
-      button.addEventListener("click", () => {
+      languageButtons.forEach((languageButton) => {
+        languageButton.addEventListener("click", () => {
+          const selectedLanguage = languageButton.dataset.lang;
+          localStorage.setItem("profile-language", selectedLanguage);
+          applyLanguage(selectedLanguage);
+        });
+      });
+
+      themeButton.addEventListener("click", () => {
         const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
         localStorage.setItem("profile-theme", nextTheme);
         applyTheme(nextTheme);
