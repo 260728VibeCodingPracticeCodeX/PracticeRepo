@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이성호 | 자기소개</title>
+  <style>
+    :root {
+      --ink: #18212b;
+      --text: #4e5d6c;
+      --muted: #83909c;
+      --blue: #378fca;
+      --blue-soft: #e7f3fa;
+      --mint: #dff3ea;
+      --peach: #ffe9d9;
+      --paper: #ffffff;
+      --page: #f4f6f7;
+      --line: #dfe5e9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--page);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 36px));
+      margin: 24px auto;
+      background: var(--paper);
+      box-shadow: 0 16px 50px rgba(24, 33, 43, 0.07);
+    }
+
+    .hero {
+      min-height: 460px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 50px;
+      align-items: center;
+      padding: clamp(42px, 7vw, 82px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    p,
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+    }
+
+    .hero-label {
+      margin-bottom: 15px;
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: clamp(4rem, 10vw, 7.5rem);
+      line-height: 0.94;
+      letter-spacing: -0.08em;
+    }
+
+    .name-en {
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+    }
+
+    .job {
+      margin-bottom: 7px;
+      color: var(--ink);
+      font-size: clamp(1.05rem, 2.3vw, 1.35rem);
+      font-weight: 800;
+      word-break: keep-all;
+    }
+
+    .role {
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .hero-statement {
+      max-width: 610px;
+      margin-bottom: 0;
+      color: var(--ink);
+      font-size: clamp(1.2rem, 2.8vw, 1.75rem);
+      font-weight: 700;
+      line-height: 1.5;
+      word-break: keep-all;
+    }
+
+    .portrait {
+      width: 250px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      justify-self: end;
+      color: var(--paper);
+      background: var(--blue);
+      border-radius: 50%;
+    }
+
+    .portrait::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        125deg,
+        rgba(255,255,255,.13) 0 2px,
+        transparent 2px 12px
+      );
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      width: 135px;
+      height: 135px;
+      right: -38px;
+      bottom: -38px;
+      background: rgba(255,255,255,.12);
+      border-radius: 50%;
+    }
+
+    .initials {
+      z-index: 1;
+      font-size: 4.4rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .plant {
+      position: absolute;
+      right: 18%;
+      bottom: 15%;
+      z-index: 2;
+      font-size: 2.2rem;
+    }
+
+    .content {
+      padding: 0 clamp(28px, 7vw, 82px);
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns: minmax(190px, 28%) 1fr;
+      gap: clamp(30px, 6vw, 74px);
+      padding: clamp(34px, 5vw, 56px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+    }
+
+    .section-index {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--blue);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      color: var(--ink);
+      font-size: clamp(1.65rem, 3.4vw, 2.5rem);
+      line-height: 1.2;
+      letter-spacing: -0.05em;
+    }
+
+    .section-body {
+      align-self: center;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin-bottom: 0;
+      color: var(--ink);
+      font-size: clamp(1.04rem, 2vw, 1.22rem);
+      font-weight: 700;
+      line-height: 1.75;
+      word-break: keep-all;
+    }
+
+    .sub-copy {
+      max-width: 680px;
+      margin: 12px 0 0;
+      color: var(--text);
+      font-size: 0.94rem;
+      word-break: keep-all;
+    }
+
+    .example {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 20px;
+      padding: 11px 15px;
+      color: #7c5036;
+      background: var(--peach);
+      border-radius: 13px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transform: rotate(-0.5deg);
+    }
+
+    .example-icon {
+      font-size: 1.45rem;
+    }
+
+    .role-grid,
+    .purpose-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .role-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .purpose-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .info-card {
+      min-height: 128px;
+      padding: 20px;
+      background: var(--blue-soft);
+      border-radius: 15px;
+    }
+
+    .info-card:nth-child(even) {
+      background: var(--mint);
+    }
+
+    .info-card strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    .info-card span {
+      display: block;
+      color: var(--text);
+      font-size: 0.88rem;
+      word-break: keep-all;
+    }
+
+    .purpose-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      border-radius: 4px 4px 12px 12px;
+    }
+
+    .purpose-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 0.94rem;
+    }
+
+    .purpose-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      word-break: keep-all;
+    }
+
+    .trait-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .trait {
+      padding: 7px 12px;
+      color: var(--blue);
+      background: var(--blue-soft);
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .interest-layout {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .interest-icons {
+      width: 112px;
+      height: 112px;
+      display: grid;
+      place-items: center;
+      background: var(--mint);
+      border-radius: 50%;
+      font-size: 2.25rem;
+      white-space: nowrap;
+    }
+
+    footer {
+      padding: 28px;
+      color: var(--muted);
+      text-align: center;
+      background: #fafbfb;
+      border-top: 1px solid var(--line);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 40px 24px;
+      }
+
+      .portrait {
+        width: 190px;
+        justify-self: start;
+        grid-row: 1;
+      }
+
+      .hero-copy {
+        grid-row: 2;
+      }
+
+      .section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .role-grid,
+      .purpose-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .content {
+        padding: 0 22px;
+      }
+
+      .interest-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .interest-icons {
+        width: 96px;
+        height: 96px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="hero-label">PERSONAL PROFILE</p>
+        <h1>이성호</h1>
+        <p class="name-en">LEE SUNG HO</p>
+        <p class="job">임베디드 엔지니어 · 전자제품 개발자</p>
+        <p class="role">스타트업 개발팀장</p>
+        <p class="hero-statement">생활 속 아이디어를 실제로 움직이는 제품으로 만듭니다.</p>
+      </div>
+
+      <div class="portrait" aria-label="이성호 프로필 그래픽">
+        <span class="initials">SH</span>
+        <span class="plant" aria-hidden="true">🪴</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="section">
+        <div>
+          <span class="section-index">01 · WHO I AM</span>
+          <h2>어떤 사람인가</h2>
+        </div>
+        <div class="section-body">
+          <p class="lead">문제가 생기면 직접 확인하고, 원인을 찾을 때까지 차근차근 살펴봅니다.</p>
+          <p class="sub-copy">복잡한 문제는 작은 단위로 나누고 실제 사용 환경에서도 안정적으로 쓸 수 있는 결과를 중요하게 생각합니다.</p>
+          <div class="example"><span class="example-icon" aria-hidden="true">🪴</span>목마르면 표정이 바뀌는 화분 같은 아이디어를 좋아합니다.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div>
+          <span class="section-index">02 · WHAT I DO</span>
+          <h2>현재 하는 일</h2>
+        </div>
+        <div class="section-body role-grid">
+          <article class="info-card">
+            <strong>아이디어 구체화</strong>
+            <span>생활 속 생각을 실제로 개발할 수 있는 제품의 모습으로 정리합니다.</span>
+          </article>
+          <article class="info-card">
+            <strong>팀과 문제 해결</strong>
+            <span>개발 과정에서 생기는 문제를 팀원들과 확인하고 함께 해결합니다.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div>
+          <span class="section-index">03 · WHY I’M HERE</span>
+          <h2>교육에 참여한 이유</h2>
+        </div>
+        <div class="section-body">
+          <p class="lead">바이브코딩을 실제 업무에 활용할 방법을 직접 확인해 보고 싶습니다.</p>
+          <div class="purpose-grid">
+            <div class="purpose-card"><strong>테스트용 앱</strong><span>제품 기능과 아이디어 확인</span></div>
+            <div class="purpose-card"><strong>업무 도구</strong><span>반복적인 개발 업무 줄이기</span></div>
+            <div class="purpose-card"><strong>소개 자료</strong><span>회사와 제품을 쉽게 설명하기</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div>
+          <span class="section-index">04 · HOW I THINK</span>
+          <h2>일하는 방식</h2>
+        </div>
+        <div class="section-body">
+          <div class="trait-list" aria-label="나를 표현하는 키워드">
+            <span class="trait">호기심</span>
+            <span class="trait">끈기</span>
+            <span class="trait">현실적인 문제 해결</span>
+          </div>
+          <p class="lead">넘겨짚기보다 직접 확인하고, 임시방편보다 실제로 계속 사용할 수 있는 방법을 찾습니다.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div>
+          <span class="section-index">05 · OUTSIDE WORK</span>
+          <h2>좋아하는 시간</h2>
+        </div>
+        <div class="section-body interest-layout">
+          <div class="interest-icons" aria-hidden="true">🚗 🎵</div>
+          <p class="lead">그날의 기분에 따라 다양한 음악을 들으며 운전하고, 생각을 정리하는 시간을 좋아합니다.</p>
+        </div>
+      </section>
+    </div>
+
+    <footer>교육에서 잘 부탁드립니다.</footer>
+  </main>
+</body>
+</html>
